@@ -78,18 +78,15 @@
 \begin{document}
 
 \titlepage
-\section{How to Programs are written for Quantum Computers}
+\section{How to Program Quantum Computers}
 \subsection{Quantum Circuits}
 \begin{frame}
     \frametitle{Quantum Circuits}
-    
-\end{frame}
-\subsubsection{OpenQASM}
-\begin{frame}
-    \frametitle{OpenQASM}
     \begin{columns}
         \column{0.5\textwidth}
-            \lstinputlisting{bell.qasm}
+            \begin{itemize}
+                \item
+            \end{itemize}
         \column{0.5\textwidth}
             \begin{equation*}
                 \Qcircuit @C=1.0em @R=0.0em @!R {
@@ -101,6 +98,40 @@
             \end{equation*}
     \end{columns}
 \end{frame}
+\subsubsection{Quantum Gates}
+\begin{frame}
+    \frametitle{Quantum Gates}
+    \begin{itemize}
+        \item Quantum gates
+        \item Gates are reversible
+        \item Each gate represents a unitary matrix that gets multiplied
+            against state of qubits it operates on
+    \end{itemize}
+    \includegraphics[width=\textwidth]{gate_h_bloch.png}
+\end{frame}
+
+\begin{frame}
+    
+\end{frame}
+
+\subsubsection{OpenQASM}
+\begin{frame}
+    \frametitle{OpenQASM\footnotemark[1]\footnotemark[2]}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \lstinputlisting{bell.qasm}
+        \column{0.5\textwidth}
+            \begin{itemize}
+                \item Open Quantum Assembly Language
+                \item An option
+                \item Mostly used as a transport layer to save circuits
+                    or share circuits
+            \end{itemize}
+    \end{columns}
+    \footnotetext[1]{\href{https://arxiv.org/abs/1707.03429}{https://arxiv.org/abs/1707.03429}}
+    \footnotetext[2]{\href{https://github.com/Qiskit/openqasm}{https://github.com/Qiskit/openqasm}}
+\end{frame}
+
 \subsection{Pulse}
 \begin{frame}
     \frametitle{Pulse Level Programming}
@@ -108,16 +139,14 @@
         \column{0.5\textwidth}
             \includegraphics[width=\textwidth]{bell-sched.png}
         \column{0.5\textwidth}
-            \begin{equation*}
-                \Qcircuit @C=1.0em @R=0.0em @!R {
-                    \lstick{ q_{0} : \ket{0} } & \gate{H} & \ctrl{1} & \meter & \qw & \qw & \qw\\
-                    \lstick{ q_{1} : \ket{0} } & \qw & \targ & \qw & \meter & \qw & \qw\\
-                    \lstick{c_{0}: 0} & \cw & \cw & \cw \cwx[-2] & \cw & \cw & \cw\\
-                    \lstick{c_{1}: 0} & \cw & \cw & \cw & \cw \cwx[-2] & \cw & \cw\\
-                }
-            \end{equation*}
+            \begin{itemize}
+                \item A layer below the circuit model is to use pulses
+                \item Each quantum gate is defined as a pulse that gets
+                    applied to the qubits
+                \item Enables you to tweak the definition of gates
+                \item Mostly used for physics research or hardware characterization
+            \end{itemize}
     \end{columns}
-
 \end{frame}
 
 \section{Constraints for Running on Quantum Computers}
@@ -211,23 +240,49 @@
 \begin{frame}
     \frametitle{The DAG}
         \begin{columns}
-            \column{0.5\textwidth}
+            \column{0.45\textwidth}
                 \begin{itemize}
                     \item Compiler represents circuits as a DAG
                     \item Each node in the DAG is an operation, an input, or
                           an output
-                    \item Each edge corresponds to a qubit or classical bit
+                    \item Each edge indicates data flow between nodes
+                    \item Makes flow of information between operations
+                        explicit
                 \end{itemize}
-            \column{0.5\textwidth}
+            \column{0.45\textwidth}
                 \centering
                 \includegraphics[width=0.75\textwidth]{bell-dag.png}
         \end{columns}
 \end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.45\textwidth}
+            \centering
+            \begin{equation*}
+                \Qcircuit @C=1.0em @R=0.0em @!R {
+            	 	\lstick{ {q}_{0} : \ket{0} } & \gate{H} & \ctrl{1} & \meter & \qw & \qw & \qw\\
+                	\lstick{ {q}_{1} : \ket{0} } & \qw & \targ & \qw & \gate{R_z(0.5)} & \qw & \qw\\
+                	\lstick{ {q}_{2} : \ket{0} } & \qw & \qw & \qw & \qw & \qw & \qw\\
+                	\lstick{c_{0}: 0} & \cw & \cw & \cw \cwx[-3] & \controlo \cw \cwx[-2] & \cw & \cw\\
+                	\lstick{c_{1}: 0} & \cw & \cw & \cw & \control \cw \cwx[-1] & \cw & \cw\\
+                	\lstick{c_{2}: 0} & \cw & \cw & \cw & \controlo \cw \cwx[-1] & \cw & \cw\\
+                }
+            \end{equation*}
+        \column{.01\textwidth}
+            \centering
+            $\rightarrow$
+        \column{0.45\textwidth}
+            \centering
+            \includegraphics[width=0.75\textwidth]{classical_dep_dag.png}
+        \end{columns}
+\end{frame}
+
 \begin{frame}
     \frametitle{Pass Manager}
     \begin{columns}
         \column{0.5\textwidth}
-
+            The pass
         \column{0.5\textwidth}
             \includegraphics[width=\textwidth]{passmanager.png}
     \end{columns}
@@ -273,7 +328,7 @@
     \frametitle{Quantum Volume\footnotemark[1]}
 
     \vspace{3em}
-    \footnotetext[1]{https://arxiv.org/abs/1811.12926}
+    \footnotetext[1]{\href{https://arxiv.org/abs/1811.12926}{https://arxiv.org/abs/1811.12926}}
 \end{frame}
 \begin{frame}
     \frametitle{Conclusions}
