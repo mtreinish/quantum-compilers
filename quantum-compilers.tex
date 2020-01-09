@@ -85,7 +85,7 @@
     \begin{columns}
         \column{0.5\textwidth}
             \begin{itemize}
-                \item
+                \item 
             \end{itemize}
         \column{0.5\textwidth}
             \begin{equation*}
@@ -288,6 +288,28 @@
     \includegraphics[width=\textwidth]{passmanager_2.png}
 \end{frame}
 }
+\begin{frame}
+    \frametitle{Passmanager Stages}
+    \begin{columns}
+        \column{.45\textwidth}
+            \begin{itemize}
+                \item Stages
+                    \begin{itemize}
+                        \item Logical Reductions
+                        \item Embedding
+                            \begin{itemize}
+                                \item Layout
+                                \item Mapping/Routing
+                                \item Unrolling
+                            \end{itemize}
+                        \item Physical Reductions
+                    \end{itemize}
+                \item Pluggable and extensible
+            \end{itemize}
+        \column{.45\textwidth}
+            \includegraphics[width=\textwidth]{passmanager_stages.png}
+    \end{columns}
+\end{frame}
 \subsection{Preset Pass Managers}
 
 
@@ -297,6 +319,85 @@
     \frametitle{The Unroller}
 \end{frame}
 
+\subsection{Layout}
+\begin{frame}
+    \frametitle{Layout}
+    \begin{columns}
+        \column{.45\textwidth}
+            \begin{itemize}
+                \item Initial mapping to physical qubits
+                \item Multiple options included
+                    \begin{itemize}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/layout/trivial\_layout.py}{TrivialLayout}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/layout/dense\_layout.py}{DenseLayout}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/layout/noise\_adaptive\_layout.py}{NoiseAdaptiveLayout}
+                    \end{itemize}
+            \end{itemize}
+        \column{.45\textwidth}
+            \centering
+            \includegraphics[width=1.1\textwidth]{layout.png}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Layout Example}
+    \begin{columns}
+        \column{.45\textwidth}
+            \centering
+            \textbf{Logical Circuit}
+            \includegraphics[width=\textwidth]{no_layout.png}
+        \column{.45\textwidth}
+            \centering
+            \textbf{Target Device}
+            \only<1>{\includegraphics[width=\textwidth]{ibmqx2-labeled.png}}
+            \only<2>{\includegraphics[width=\textwidth]{layout_device.png}}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}
+    \begin{columns}
+        \column{.5\textwidth}
+            \centering
+            optimization\_level=1\\
+            TrivialLayout\\
+            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_1.png}\\
+            optimization\_level=2\\
+            DenseLayout\\
+            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_2.png}
+
+        \column{.5\textwidth}
+            \centering
+            optimization\_level=3\\
+            NoiseAdaptiveLayout\\
+            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_3.png}\\
+            Custom Layout\\
+            (optimization\_level=1)\\
+            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{custom_layout.png}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{.5\textwidth}
+            \centering
+            optimization\_level=1\\
+            TrivialLayout\\
+            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_1_results.png}\\
+            optimization\_level=2\\
+            DenseLayout\\
+        \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_2_results.png}
+
+        \column{.5\textwidth}
+            \centering
+            optimization\_level=3\\
+            NoiseAdaptiveLayout\\
+            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_3_results.png}\\
+            Custom Layout\\
+            (optimization\_level=1)\\
+            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{custom_layout_results.png}
+    \end{columns}
+\end{frame}
 \subsection{Analysis Pass}
 {
 \setbeamercolor{background canvas}{bg=black}
