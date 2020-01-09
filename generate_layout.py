@@ -14,8 +14,7 @@ qc.draw(output='mpl').savefig('no_layout.png', dpi=900)
 from qiskit.test import mock
 from qiskit.providers.ibmq import least_busy
 backend = mock.FakeYorktown()
-qk.IBMQ.load_account()
-prov = qk.IBMQ.get_provider(hub='ibm-q-internal', group='dev-qiskit')
+prov = qk.IBMQ.load_account()
 small_devices = prov.backends(
     filters=lambda x: x.configuration().n_qubits == 5
     and not x.configuration().simulator)
