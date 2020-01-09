@@ -277,16 +277,13 @@
             \includegraphics[width=0.75\textwidth]{classical_dep_dag.png}
         \end{columns}
 \end{frame}
-
+{
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{footline}{fg=ibm}
 \begin{frame}
-    \frametitle{Pass Manager}
-    \begin{columns}
-        \column{0.5\textwidth}
-            The pass
-        \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{passmanager.png}
-    \end{columns}
+    \includegraphics[width=\textwidth]{passmanager.png}
 \end{frame}
+}
 \subsection{Preset Pass Managers}
 \section{Passes}
 \begin{frame}
@@ -311,12 +308,24 @@
 \begin{frame}
     \frametitle{The Unroller}
 \end{frame}
-\subsection{Gate Cancellation}
+
+\subsection{Analysis Pass}
+{
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{footline}{fg=ibm}
+\begin{frame}
+    \includegraphics[width=\textwidth]{block_collection.png}
+\end{frame}
+}
+
+\subsection{Optimization Passes}
 \subsubsection{Optimize 1Q operations}
 \begin{frame}
     \frametitle{Optimize 1Q Operations}
 \end{frame}
+
 \subsubsection{Consolidate Blocks}
+
 \begin{frame}
 
 \end{frame}
