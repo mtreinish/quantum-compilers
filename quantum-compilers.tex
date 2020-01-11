@@ -319,7 +319,35 @@
     \end{columns}
 \end{frame}
 \subsection{Preset Pass Managers}
-
+\begin{frame}
+    \frametitle{Preset Pass Managers}
+    \begin{itemize}
+        \item Out of the box 4 optimization levels (0-3) with preset pass managers
+        \item Increasing levels of optimization vs execute time
+    \end{itemize}
+    \begin{columns}
+    \only<1>{
+        \column{.5\textwidth}
+            \centering
+            \textbf{Level 0}\\
+            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{preset_level_0.png}
+        \column{.5\textwidth}
+            \centering
+            \textbf{Level 1}\\
+            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{preset_level_1.png}
+    }
+    \only<2>{
+        \column{.5\textwidth}
+            \centering
+            \textbf{Level 2}\\
+            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{preset_level_2.png}
+        \column{.5\textwidth}
+            \centering
+            \textbf{Level 3}\\
+            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{preset_level_3.png}
+    }
+    \end{columns}
+\end{frame}
 
 \section{Passes}
 \subsection{Unroller}
@@ -369,19 +397,19 @@
             \centering
             optimization\_level=1\\
             TrivialLayout\\
-            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_1.png}\\
+            \includegraphics[width=\textwidth, height=.6\textheight, keepaspectratio]{layout_1.png}\\
             optimization\_level=2\\
             DenseLayout\\
-            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_2.png}
+            \includegraphics[width=\textwidth, height=.6\textheight, keepaspectratio]{layout_2.png}
 
         \column{.5\textwidth}
             \centering
             optimization\_level=3\\
             NoiseAdaptiveLayout\\
-            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_3.png}\\
+            \includegraphics[width=\textwidth, height=.6\textheight, keepaspectratio]{layout_3.png}\\
             Custom Layout\\
             (optimization\_level=1)\\
-            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{custom_layout.png}
+            \includegraphics[width=\textwidth, height=.6\textheight, keepaspectratio]{custom_layout.png}
     \end{columns}
 \end{frame}
 
@@ -391,19 +419,19 @@
             \centering
             optimization\_level=1\\
             TrivialLayout\\
-            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_1_results.png}\\
+            \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{layout_1_results.png}\\
             optimization\_level=2\\
             DenseLayout\\
-        \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_2_results.png}
+        \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{layout_2_results.png}
 
         \column{.5\textwidth}
             \centering
             optimization\_level=3\\
             NoiseAdaptiveLayout\\
-            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{layout_3_results.png}\\
+            \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{layout_3_results.png}\\
             Custom Layout\\
             (optimization\_level=1)\\
-            \includegraphics[width=\linewidth, height=.4\textheight, keepaspectratio]{custom_layout_results.png}
+            \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{custom_layout_results.png}
     \end{columns}
 \end{frame}
 \subsection{Analysis Pass}
@@ -472,13 +500,13 @@
         \item Qiskit: \href{https://qiskit.org/}{https://qiskit.org/}
         \item Qiskit Terra on Github: \href{https://github.com/Qiskit/qiskit-terra}{https://github.com/Qiskit/qiskit-terra}
         \item IBM Q Experience: \href{https://quantum-computing.ibm.com}{https://quantum-computing.ibm.com}
-        \item Tutorials on Quantum Computing and Qiskit: \href{https://github.com/Qiskit/qiskit-tutorials}{https://github.com/Qiskit/qiskit-tutorials}
+        \item Tutorial on using Passmanager: {\small \href{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}}
     \end{itemize}
 \end{frame}
 
-\section{Backup Slides}
-\begin{frame}[noframenumbering]
-    \frametitle{BACKUP SLIDES}
-\end{frame}
+%\section{Backup Slides}
+%\begin{frame}[noframenumbering]
+%    \frametitle{BACKUP SLIDES}
+%\end{frame}
 
 \end{document}
