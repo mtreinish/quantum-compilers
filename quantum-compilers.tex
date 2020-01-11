@@ -104,15 +104,21 @@
     \begin{itemize}
         \item Quantum gates
         \item Gates are reversible
-        \item Each gate represents a unitary matrix that gets multiplied
-            against state of qubits it operates on
+        \item Each gate can be represented as a unitary matrix
     \end{itemize}
-    \includegraphics[width=\textwidth]{gate_h_bloch.png}
+    \includegraphics[width=.85\textwidth]{gate_h_bloch.png}
 \end{frame}
 
-\begin{frame}
-    
-\end{frame}
+%\renewcommand{\arraystretch}{4}
+%
+%\begin{frame}
+%    \begin{tabular}{|*2{>{\renewcommand{\arraystretch}{1}}c|}}
+%        Pauli-X gate & $\Qcircuit @C=0.5em @R=0.0em @!R { \lstick{} & \gate{X} & \qw & \qw\\ }$ & \begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \\
+%        Pauli-Y gate & $\Qcircuit @C=0.5em @R=0.0em @!R { \lstick{} & \gate{y} & \qw & \qw\\ }$ & \begin{array}{cc} 0 & -i \\ i & 0 \end{array} \\
+%        Pauli-Z gate & $\Qcircuit @C=0.5em @R=0.0em @!R { \lstick{} & \gate{Z} & \qw & \qw\\ }$ & \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \\
+%        Hadamard & $\Qcircuit @C=0.5em @R=0.0em @!R {\lstick{} & \gate{H} & \qw & \qw\\ }$ & $\frac{1}{\sqrt{2}}$ \begin{array}{cc} 1 & 1 \\ 1 & -1 \end{array}\\
+%    \end{tabular}
+%\end{frame}
 
 \subsubsection{OpenQASM}
 \begin{frame}
@@ -219,7 +225,7 @@
 
 \section{Qiskit's Compiler}
 \begin{frame}
-    \frametitle{Qiskit Terra}
+    \frametitle{Qiskit Terra\footnotemark[1]}
     \begin{columns}
           \column{.5\textwidth}
              \begin{itemize}
@@ -229,11 +235,13 @@
                   \item Designed to be backend agnostic and work with any
                       quantum hardware or simulator
                   \item Written in Python
+                  \item Apache 2.0 Licensed
              \end{itemize}
           \column{.5\textwidth}
               \centering
               \colorbox{black}{\includegraphics[width=.5\textwidth]{qiskit-terra-logo.png}}
       \end{columns}
+      \footnotetext[1]{\href{https://github.com/Qiskit/qiskit-terra}{https://github.com/Qiskit/qiskit-terra}}
   \end{frame}
 
 \subsection{The DAG}
@@ -408,16 +416,37 @@
 }
 
 \subsection{Optimization Passes}
+\subsubsection{Consolidate Blocks}
+\begin{frame}
+    \frametitle{Consolidate Blocks}
+    \begin{enumerate}
+        \item Loop over 2Q blocks collecteds from analysis pass
+        \item Run a simulation to find unitary matrix of each block
+        \item Replace block with unitary matrix
+    \end{enumerate}
+    \begin{center}
+    \vspace{3em}
+    \only<1>{
+        \begin{equation*}
+            \Qcircuit @C=1.0em @R=1.0em @!R {
+                \lstick{ {q0}_{0} : \ket{0} } & \multigate{1}{unitary} & \multigate{2}{unitary} & \qw & \qw\\
+                \lstick{ {q0}_{1} : \ket{0} } & \ghost{unitary} & \ghost{unitary} & \qw & \qw\\
+                \lstick{ {q0}_{2} : \ket{0} } & \qw & \ghost{unitary} & \qw & \qw\\
+            }
+        \end{equation*}
+    }
+    \only<2>{\includegraphics[width=\textwidth]{unrolled_unitary.png}}
+\end{center}
+\end{frame}
+
 \subsubsection{Optimize 1Q operations}
 \begin{frame}
     \frametitle{Optimize 1Q Operations}
+    \begin{itemize}
+        \item For each run of single qubit gates find end state of rotations
+    \end{itemize}
 \end{frame}
 
-\subsubsection{Consolidate Blocks}
-
-\begin{frame}
-
-\end{frame}
 \subsection{Device Mapping}
 
 \section{Conclusions}
