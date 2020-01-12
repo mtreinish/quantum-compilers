@@ -85,7 +85,9 @@
     \begin{columns}
         \column{0.5\textwidth}
             \begin{itemize}
-                \item 
+                \item Used to describe operations on a quantum computer
+                \item Each row represents a bit (either classical or quantum)
+                \item Shows dependency of operation
             \end{itemize}
         \column{0.5\textwidth}
             \begin{equation*}
@@ -106,6 +108,7 @@
         \item Gates are reversible
         \item Each gate can be represented as a unitary matrix
     \end{itemize}
+    \centering
     \includegraphics[width=.85\textwidth]{gate_h_bloch.png}
 \end{frame}
 
@@ -129,9 +132,9 @@
         \column{0.5\textwidth}
             \begin{itemize}
                 \item Open Quantum Assembly Language
-                \item An option
+                \item Can be used to write circuits
                 \item Mostly used as a transport layer to save circuits
-                    or share circuits
+                    or as a transport
             \end{itemize}
     \end{columns}
     \footnotetext[1]{\href{https://arxiv.org/abs/1707.03429}{https://arxiv.org/abs/1707.03429}}
@@ -225,11 +228,24 @@
         \column{.5\textwidth}
             \begin{itemize}
                 \item Gate Errors
+                    \begin{itemize}
+                        \item Single Qubit Errors
+                        \item Multiqubit Errors
+                    \end{itemize}
                 \item Decoherence
+                    \begin{itemize}
+                        \item T1: Energy relaxation, the time for a qubit at
+                            $\ket{1}$ to decay to ground state $\ket{0}$
+                        \item T2: dephasing of a qubit in superposition state
+                    \end{itemize}
                 \item Readout Error
             \end{itemize}
         \column{.5\textwidth}
-            \includegraphics[width=\textwidth]{error_map.png}
+            \only<1>{\includegraphics[width=\textwidth]{error_map.png}}
+            \only<2>{
+                \includegraphics[width=\textwidth]{decoherence_t1.png}
+                \includegraphics[width=\textwidth]{decoherence_t2.png}
+            }
     \end{columns}
 \end{frame}
 
@@ -335,28 +351,24 @@
         \item Out of the box 4 optimization levels (0-3) with preset pass managers
         \item Increasing levels of optimization vs execute time
     \end{itemize}
-    \begin{columns}
+\end{frame}
+\begin{frame}
+    \centering
     \only<1>{
-        \column{.5\textwidth}
-            \centering
-            \textbf{Level 0}\\
-            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{preset_level_0.png}
-        \column{.5\textwidth}
-            \centering
-            \textbf{Level 1}\\
-            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{preset_level_1.png}
-    }
+    \textbf{Level 0}\\
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_0.png}}
     \only<2>{
-        \column{.5\textwidth}
-            \centering
-            \textbf{Level 2}\\
-            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{preset_level_2.png}
-        \column{.5\textwidth}
-            \centering
-            \textbf{Level 3}\\
-            \includegraphics[width=\textwidth,height=.75\textheight,keepaspectratio]{preset_level_3.png}
+    \textbf{Level 1}\\
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_1.png}
     }
-    \end{columns}
+    \only<3>{
+    \textbf{Level 2}\\
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_2.png}
+    }
+    \only<4>{
+        \textbf{Level 3}\\
+        \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_3.png}
+    }
 \end{frame}
 
 \section{Passes}
@@ -396,7 +408,7 @@
             \centering
             \textbf{Target Device}
             \only<1>{\includegraphics[width=\textwidth]{ibmqx2-labeled.png}}
-            \only<2>{\includegraphics[width=\textwidth]{layout_device.png}}
+            \only<2>{\includegraphics[width=.7\textwidth]{layout_device.png}}
     \end{columns}
 \end{frame}
 
@@ -498,7 +510,9 @@
 \begin{frame}
     \frametitle{Conclusions}
     \begin{itemize}
-        \item similar but different
+        \item Compilers for
+        \item A good compiler can be the difference between a functional
+            program and one that doesn't work
     \end{itemize}
 \end{frame}
 
