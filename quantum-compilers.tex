@@ -17,6 +17,7 @@
 % Color stuff
 \usepackage{color}
 \usepackage{amsmath}
+\usepackage{tabu}
 \usepackage{amssymb}
 \usepackage{empheq}
 \usepackage[braket, qm]{qcircuit}
@@ -113,6 +114,97 @@
     \includegraphics[width=.85\textwidth]{gate_h_bloch.png}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Quantum Gates}
+    \begin{columns}
+        \column{.4\textwidth}
+            $\begin{array}{ccc}
+                \textbf{Gate} & \textbf{Symbol} & \textbf{Unitary} \\
+                \hline
+                % Pauli X
+                \text{Pauli X} & \Qcircuit @C=1.0em @R=0.0em @!R {
+	         	    \lstick{} & \gate{X} & \qw \\
+                } & \begin{bmatrix}
+                    0 & 1 \\
+                    1 & 0 \\
+                \end{bmatrix} \\
+                % Pauli Y
+                \text{Pauli Y} & \Qcircuit @C=1.0em @R=0.0em @!R {
+	         	    \lstick{} & \gate{Y} & \qw \\
+                } & \begin{bmatrix}
+                    0 & -i \\
+                    i & 0 \\
+                \end{bmatrix} \\
+                % Pauli Z
+                \text{Pauli Z} & \Qcircuit @C=1.0em @R=0.0em @!R {
+	         	    \lstick{} & \gate{Z} & \qw \\
+                } & \begin{bmatrix}
+                    1 & 0 \\
+                    0 & -1 \\
+                \end{bmatrix} \\
+                % hadamard
+                \text{Hadamard} & \Qcircuit @C=1.0em @R=0.0em @!R {
+	         	    \lstick{} & \gate{H} & \qw \\
+                } & \frac{1}{\sqrt{2}}\begin{bmatrix}
+                    1 & 1 \\
+                    1 & -1 \\
+                \end{bmatrix} \\
+                % CX
+                \text{CNOT} & \Qcircuit @C=1.0em @R=0.0em @!R {
+                    \lstick{} & \ctrl{1} & \qw \\
+                    \lstick{} & \targ & \qw \\
+                } & \begin{bmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 0 & 0 & 1 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                \end{bmatrix} \\
+            \end{array}$
+        \column{.6\textwidth}
+            \centering
+            $\begin{array}{ccc}
+                \textbf{Gate} & \textbf{Symbol} & \textbf{Unitary} \\
+                \hline
+                % U1
+                \text{U1} & \Qcircuit @C=1.0em @R=0.0em @!R {
+                    \lstick{} & \gate{U1(\lambda)} & \qw \\
+                } & \begin{bmatrix}
+                    1 & 0\\
+                    0 & e^{i\lambda} \\
+                \end{bmatrix} \\
+                % U2
+                \text{U2} & \Qcircuit @C=1.0em @R=0.0em @!R {
+                    \lstick{} & \gate{U2(\phi,\lambda)} & \qw \\
+                } & \frac{1}{\sqrt{2}} \begin{bmatrix}
+                    1 & -e^{i\lambda} \\
+                    e^{i\phi} & e^{i(\phi + \lambda} \\
+                \end{bmatrix} \\
+                % U3
+                \text{U3} & \Qcircuit @C=1.0em @R=0.0em @!R {
+                    \lstick{} & \gate{Rz(\phi)} & \qw \\
+                } & U(\theta,\phi,\lambda) \\
+                % Rz
+                \text{Z Rotation} & \Qcircuit @C=1.0em @R=0.0em @!R {
+                    \lstick{} & \gate{Rz(\phi)} & \qw \\
+                } & \begin{bmatrix}
+                    e^{-\frac{i\phi}{2}} & 0 \\
+                    0 & e^{\frac{i\phi}{2}} \\
+                \end{bmatrix} \\
+
+                % SWAP
+                \text{SWAP} & \Qcircuit @C=1.0em @R=0.0em @!R {
+                    \lstick{} & \qswap & \qw\\
+                    \lstick{} & \qswap \qwx[-1] & \qw\\
+                } & \begin{bmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 0 & 1 \\
+                \end{bmatrix}
+            \end{array}$
+    \end{columns}
+\end{frame}
+
 %\renewcommand{\arraystretch}{4}
 %
 %\begin{frame}
@@ -166,6 +258,7 @@
         \item Despite programming at a low (per bit) level it still is abstracted from the hardware.
         \item The compiler is used to enable running logical abstract circuit
             on an actual device
+        \item NISQ devices have a number of limitations
     \end{itemize}
     \only<1>{
         \centering
