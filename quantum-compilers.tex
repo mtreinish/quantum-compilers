@@ -21,6 +21,7 @@
 \usepackage{empheq}
 \usepackage[braket, qm]{qcircuit}
 \usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
 \usepackage{gensymb}
 \newcommand\RBox[1]{%
   \tikz\node[draw,rounded corners,align=center,] {#1};%
@@ -162,12 +163,9 @@
 \begin{frame}
     \frametitle{Why do we need compilers?}
     \begin{itemize}
-        \item Despite programming a low level there are lots of constraints
-            with programming a quantum computer
+        \item Despite programming at a low (per bit) level it still is abstracted from the hardware.
         \item The compiler is used to enable running logical abstract circuit
             on an actual device
-        \item the performance of the compiler can be the difference between
-            getting a result and not
     \end{itemize}
     \only<1>{
         \centering
@@ -211,7 +209,7 @@
                 must be expressed in terms of their basis gates
         \end{itemize}
         \column{.5\textwidth}
-
+            something to demonstrate basis
     \end{columns}
 \end{frame}
 
@@ -424,7 +422,7 @@
             \item Other types of devices support is hardcoded extra path
         \end{itemize}
         \column{.5\textwidth}
-            Insert Diagram of Descent Tree
+            \includegraphics[width=\textwidth]{unroll_descent.png}
     \end{columns}
 \end{frame}
 
@@ -575,12 +573,18 @@
 
 \subsection{Device Mapping}
 \begin{frame}
-    \frametitle{Swap Mapping}
+    \frametitle{Swap Mapping/Routing}
     \begin{columns}
         \column{.5\textwidth}
             \begin{itemize}
                 \item After the layout step we need to ensure that 
-
+                \item 3 Algorithms included in Qiskit
+                    \begin{itemize}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/basic_swap.py}{BasicSwap}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/lookahead_swap.py}{LookaheadSwap}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/stochastic_swap.py}{StochasticSwap}
+                    \end{itemize}
+                \item StochasticSwap is used in all presets
             \end{itemize}
         \column{.5\textwidth}
             Insert Diagram of Swap Mapping
@@ -613,8 +617,9 @@
         \item These Slides: \href{https://github.com/mtreinish/quantum-compilers}{https://github.com/mtreinish/quantum-compilers}
         \item Qiskit: \href{https://qiskit.org/}{https://qiskit.org/}
         \item Qiskit Terra on Github: \href{https://github.com/Qiskit/qiskit-terra}{https://github.com/Qiskit/qiskit-terra}
-        \item IBM Q Experience: \href{https://quantum-computing.ibm.com}{https://quantum-computing.ibm.com}
+        \item IBM Q Experience (sign up to get access to public quantum computers): \href{https://quantum-computing.ibm.com}{https://quantum-computing.ibm.com}
         \item Tutorial on using Passmanager: {\small \href{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}}
+        \item Qiskit Textbook: \href{https://qiskit.org/textbook/}{https://qiskit.org/textbook/}
     \end{itemize}
 \end{frame}
 
