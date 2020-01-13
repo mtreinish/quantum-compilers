@@ -159,6 +159,62 @@
 \end{frame}
 
 \section{Constraints for Running on Quantum Computers}
+\begin{frame}
+    \frametitle{Why do we need compilers?}
+    \begin{itemize}
+        \item Despite programming a low level there are lots of constraints
+            with programming a quantum computer
+        \item The compiler is used to enable running logical abstract circuit
+            on an actual device
+        \item the performance of the compiler can be the difference between
+            getting a result and not
+    \end{itemize}
+    \only<1>{
+        \centering
+        \includegraphics[width=\textwidth,height=.6\textheight,keepaspectratio]{no_compile.png}
+    }
+    \only<2>{
+        \begin{columns}
+            \column{.45\textwidth}
+                \centering
+                \textbf{Bad Compilation}
+                \includegraphics[width=\textwidth]{bad_compile_circ.png}
+            \column{.45\textwidth}
+                \centering
+                \textbf{Good Compilation}
+                \includegraphics[width=\textwidth]{good_compile_circ.png}
+        \end{columns}
+    }
+    \only<3>{
+        \begin{columns}
+            \column{.45\textwidth}
+                \centering
+                \textbf{Bad Compilation}
+                \includegraphics[width=\textwidth]{bad_compile.png}
+            \column{.45\textwidth}
+                \centering
+                \textbf{Good Compilation}
+                \includegraphics[width=\textwidth]{good_compile.png}
+         \end{columns}
+    }
+\end{frame}
+
+\subsection{Device Characteristics}
+\begin{frame}
+    \frametitle{Basis Gates}
+    \begin{columns}
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item Each Quantum Computer only supports a small set of basis gates
+            \item These gates can be used to implement any other
+            \item For circuits to be executable by a quantum computer they
+                must be expressed in terms of their basis gates
+        \end{itemize}
+        \column{.5\textwidth}
+
+    \end{columns}
+\end{frame}
+
 \subsection{Qubit Connectivity}
 \begin{frame}
     \frametitle{Qubit Connectivity}
@@ -168,7 +224,6 @@
                 \item Qubits in a device have limited connectivity
                 \item For multi-qubit gates this means we can only run them
                     between those qubits
-                \item Need to use SWAP gates to move state around
             \end{itemize}
         \column{.5\textwidth}
             \centering
@@ -178,49 +233,33 @@
             \only<2>{\includegraphics[width=\textwidth]{rochester_map.png}}
     \end{columns}
 \end{frame}
+
 \begin{frame}
-    \frametitle{Mapping}
-    \begin{equation*}
-        \Qcircuit @C=1.0em @R=0.0em @!R {
-    	 	\lstick{ {q0}_{0} : \ket{0} } & \gate{H} & \qw & \ctrl{4} & \gate{H} & \qw & \qw & \qw & \qw & \qw\\
-    	 	\lstick{ {q0}_{1} : \ket{0} } & \gate{H} & \qw & \qw & \ctrl{3} & \gate{H} & \qw & \qw & \qw & \qw\\
-    	 	\lstick{ {q0}_{2} : \ket{0} } & \gate{H} & \qw & \qw & \qw & \ctrl{2} & \gate{H} & \qw & \qw & \qw\\
-    	 	\lstick{ {q0}_{3} : \ket{0} } & \gate{H} & \qw & \qw & \qw & \qw & \ctrl{1} & \gate{H} & \qw & \qw\\
-    	 	\lstick{ {q0}_{4} : \ket{0} } & \gate{X} & \gate{H} & \targ & \targ & \targ & \targ & \gate{H} & \qw & \qw\\
-    	 }
-    \end{equation*}
-
-    \begin{equation*}
-    \Qcircuit @C=1.0em @R=0.0em @!R {
-	 	\lstick{ {q}_{0} : \ket{0} } & \gate{H} & \qswap & \qw & \qw & \qw & \qw & \qw & \qswap & \qw & \qw & \qw & \qw & \qw\\
-	 	\lstick{ {q}_{1} : \ket{0} } & \gate{H} & \qw & \qw & \qw & \qswap & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw\\
-	 	\lstick{ {q}_{2} : \ket{0} } & \gate{H} & \qswap \qwx[-2] & \ctrl{2} & \gate{H} & \qswap \qwx[-1] & \ctrl{2} & \gate{H} & \qswap \qwx[-2] & \ctrl{2} & \gate{H} & \qw & \qw & \qw\\
-	 	\lstick{ {q}_{3} : \ket{0} } & \gate{H} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{1} & \gate{H} & \qw & \qw\\
-	 	\lstick{ {q}_{4} : \ket{0} } & \gate{X} & \gate{H} & \targ & \qw & \qw & \targ & \qw & \qw & \targ & \targ & \gate{H} & \qw & \qw\\
-	 }
-\end{equation*}
-
-\begin{equation*}
-    \Qcircuit @C=1.0em @R=0.0em @!R {
-	 	\lstick{ {q}_{0} : \ket{0} } & \gate{X} & \gate{H} & \targ & \qswap & \gate{H} & \qw & \qw & \qw & \qw & \qw & \qw\\
-	 	\lstick{ {q}_{1} : \ket{0} } & \gate{H} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{1} & \gate{H} & \qw & \qw\\
-	 	\lstick{ {q}_{2} : \ket{0} } & \gate{H} & \qswap \qwx[2] & \ctrl{-2} & \qswap \qwx[-2] & \targ & \qw & \targ & \targ & \gate{H} & \qw & \qw\\
-	 	\lstick{ {q}_{3} : \ket{0} } & \gate{H} & \qw & \qw & \qw & \ctrl{-1} & \gate{H} & \qw & \qw & \qw & \qw & \qw\\
-	 	\lstick{ {q}_{4} : \ket{0} } & \gate{H} & \qswap & \qw & \qw & \qw & \qw & \ctrl{-2} & \gate{H} & \qw & \qw & \qw\\
-	 }
-\end{equation*}
-
-
+    \frametitle{Not Enough Connectivity}
+    \begin{columns}
+        \column{.5\textwidth}
+            \begin{itemize}
+                \item If there
+                \item Use SWAP gate to move state around
+            \end{itemize}
+        \column{.5\textwidth}
+            \textbf{SWAP Gate}
+            \begin{equation*}
+                \Qcircuit @C=1.0em @R=1.0em @!R {
+	 	            \lstick{ {q}_{0} : \ket{0} } & \qswap & \qw & \qw\\
+            	    \lstick{ {q}_{1} : \ket{0} } & \qswap \qwx[-1] & \qw & \qw\\
+            	}
+            \end{equation*}
+            $\equiv$
+            \begin{equation*}
+                \Qcircuit @C=1.0em @R=0.2em @!R {
+            	 	\lstick{ {q}_{0} : \ket{0} } & \ctrl{1} & \targ & \ctrl{1} & \qw & \qw\\
+	         	    \lstick{ {q}_{1} : \ket{0} } & \targ & \ctrl{-1} & \targ & \qw & \qw\\
+                }
+            \end{equation*}
+    \end{columns}
 \end{frame}
-\subsection{Other Device Characteristics}
-\begin{frame}
-    \frametitle{Basis Gates}
 
-\end{frame}
-\begin{frame}
-    \frametitle{Unrolling}
-
-\end{frame}
 \subsection{Noise}
 \begin{frame}
     \frametitle{Noise}
@@ -375,6 +414,18 @@
 \subsection{Unroller}
 \begin{frame}
     \frametitle{The Unroller}
+    \begin{columns}
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item The first stage of any compilation is to unroll the gates to
+                the basis set
+            \item Currently this is done using a descent tree
+            \item Mainly works for superconducting qubit basis
+            \item Other types of devices support is hardcoded extra path
+        \end{itemize}
+        \column{.5\textwidth}
+            Insert Diagram of Descent Tree
+    \end{columns}
 \end{frame}
 
 \subsection{Layout}
@@ -492,12 +543,50 @@
 \subsubsection{Optimize 1Q operations}
 \begin{frame}
     \frametitle{Optimize 1Q Operations}
-    \begin{itemize}
-        \item For each run of single qubit gates find end state of rotations
-    \end{itemize}
+    \begin{enumerate}
+        \item Find all runs of 1Q operations on each Qubit in the dag
+        \item For each run calculate the end state rotation
+        \item Replace all 1Q operations with a single rotation gate to that end state
+    \end{enumerate}
+    \only<1> {
+        \vspace{3em}
+        \begin{equation*}
+            \Qcircuit @C=1.0em @R=0.0em @!R {
+	            \lstick{ {q}_{0} : \ket{0} } & \gate{H} & \gate{R_z(\frac{\pi}{4})} & \qw & \qw\\
+    	    }
+        \end{equation*}
+    }
+    \only<2> {
+        \includegraphics[width=.3\textwidth]{bloch_fresh.png} $\rightarrow$ \includegraphics[width=.3\textwidth]{bloch_hadamard.png} $\rightarrow$ \includegraphics[width=.3\textwidth]{result_1q_bloch.png}
+    }
+    \only<3> {
+        \includegraphics[width=.45\textwidth]{bloch_fresh.png} $\rightarrow$ \includegraphics[width=.45\textwidth]{result_1q_bloch.png}
+    }
+    \only<4> {
+        \vspace{3em}
+        \begin{equation*}
+            \Qcircuit @C=1.0em @R=0.0em @!R {
+        	 	\lstick{ {q}_{0} : \ket{0} } & \gate{U_2\left(\frac{\pi}{4},\pi\right)} & \qw & \qw\\
+            }
+        \end{equation*}
+    }
+
 \end{frame}
 
 \subsection{Device Mapping}
+\begin{frame}
+    \frametitle{Swap Mapping}
+    \begin{columns}
+        \column{.5\textwidth}
+            \begin{itemize}
+                \item After the layout step we need to ensure that 
+
+            \end{itemize}
+        \column{.5\textwidth}
+            Insert Diagram of Swap Mapping
+    \end{columns}
+        
+\end{frame}
 
 \section{Conclusions}
 \subsection{Quantum Volume}
@@ -510,7 +599,8 @@
 \begin{frame}
     \frametitle{Conclusions}
     \begin{itemize}
-        \item Compilers for
+        \item Techniques used are similar to a classical compiler
+        \item Implementation details are different because of uniqueness of quantum computing
         \item A good compiler can be the difference between a functional
             program and one that doesn't work
     \end{itemize}
