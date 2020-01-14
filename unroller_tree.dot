@@ -1,0 +1,9 @@
+digraph basis_unroll {
+    CX [color=blue];
+    U3 [color=blue];
+    Rz -> U1 -> U3;
+    H -> U2 -> U3;
+    CZ -> H;
+    CZ -> CX;
+    SWAP -> CX;
+}
