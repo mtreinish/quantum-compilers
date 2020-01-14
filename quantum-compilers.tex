@@ -280,10 +280,10 @@
     \begin{columns}
         \column{.5\textwidth}
         \begin{itemize}
-            \item Each Quantum Computer only supports a small set of basis gates
-            \item These gates can be used to implement any other
-            \item For circuits to be executable by a quantum computer they
-                must be expressed in terms of their basis gates
+            \item Each Quantum Computer only supports a set of basis gates
+            \item These gates can be used to implement all other gates
+            \item Prior to running on a quantum computer the gates must be
+                defined using the basis set
         \end{itemize}
         \column{.5\textwidth}
             \textbf{Superconducting Qubits:}\\
@@ -319,24 +319,24 @@
     \begin{columns}
         \column{.5\textwidth}
             \begin{itemize}
-                \item If there
-                \item Use SWAP gate to move state around
+                \item Connectivity is not always sufficient to fully map logical circuit
+                \item Use SWAP gate to move state around between qubits
+                \item Adding swaps are potentially expensive from noise perspective
             \end{itemize}
         \column{.5\textwidth}
-            \textbf{SWAP Gate}
-            \begin{equation*}
-                \Qcircuit @C=1.0em @R=1.0em @!R {
-	 	            \lstick{ {q}_{0} : \ket{0} } & \qswap & \qw & \qw\\
-            	    \lstick{ {q}_{1} : \ket{0} } & \qswap \qwx[-1] & \qw & \qw\\
-            	}
-            \end{equation*}
-            $\equiv$
-            \begin{equation*}
-                \Qcircuit @C=1.0em @R=0.2em @!R {
-            	 	\lstick{ {q}_{0} : \ket{0} } & \ctrl{1} & \targ & \ctrl{1} & \qw & \qw\\
-	         	    \lstick{ {q}_{1} : \ket{0} } & \targ & \ctrl{-1} & \targ & \qw & \qw\\
-                }
-            \end{equation*}
+            \begin{center}
+                \textbf{SWAP Gate}
+                \begin{equation*}
+                    \Qcircuit @C=1.0em @R=1.0em @!R {
+	 	                \lstick{} & \qswap & \qw\\
+            	        \lstick{} & \qswap \qwx[-1] & \qw\\
+                    } \equiv
+                    \Qcircuit @C=1.0em @R=0.2em @!R {
+                	 	\lstick{} & \ctrl{1} & \targ & \ctrl{1} & \qw\\
+	             	    \lstick{} & \targ & \ctrl{-1} & \targ & \qw\\
+                    }
+                \end{equation*}
+            \end{center}
     \end{columns}
 \end{frame}
 
@@ -658,9 +658,10 @@
 \begin{frame}
     \frametitle{Consolidate Blocks}
     \begin{enumerate}
-        \item Loop over 2Q blocks collecteds from analysis pass
+        \item Loop over 2Q blocks collected from analysis pass
         \item Run a simulation to find unitary matrix of each block
         \item Replace block with unitary matrix
+        \item Decompose unitary to basis gates with unroller
     \end{enumerate}
     \begin{center}
     \vspace{3em}
