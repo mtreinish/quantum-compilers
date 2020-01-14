@@ -205,17 +205,6 @@
     \end{columns}
 \end{frame}
 
-%\renewcommand{\arraystretch}{4}
-%
-%\begin{frame}
-%    \begin{tabular}{|*2{>{\renewcommand{\arraystretch}{1}}c|}}
-%        Pauli-X gate & $\Qcircuit @C=0.5em @R=0.0em @!R { \lstick{} & \gate{X} & \qw & \qw\\ }$ & \begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \\
-%        Pauli-Y gate & $\Qcircuit @C=0.5em @R=0.0em @!R { \lstick{} & \gate{y} & \qw & \qw\\ }$ & \begin{array}{cc} 0 & -i \\ i & 0 \end{array} \\
-%        Pauli-Z gate & $\Qcircuit @C=0.5em @R=0.0em @!R { \lstick{} & \gate{Z} & \qw & \qw\\ }$ & \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \\
-%        Hadamard & $\Qcircuit @C=0.5em @R=0.0em @!R {\lstick{} & \gate{H} & \qw & \qw\\ }$ & $\frac{1}{\sqrt{2}}$ \begin{array}{cc} 1 & 1 \\ 1 & -1 \end{array}\\
-%    \end{tabular}
-%\end{frame}
-
 \subsubsection{OpenQASM}
 \begin{frame}
     \frametitle{OpenQASM\footnotemark[1]\footnotemark[2]}
@@ -226,8 +215,7 @@
             \begin{itemize}
                 \item Open Quantum Assembly Language
                 \item Can be used to write circuits
-                \item Mostly used as a transport layer to save circuits
-                    or as a transport
+                \item Mostly used as a transport or to save circuits
             \end{itemize}
     \end{columns}
     \footnotetext[1]{\href{https://arxiv.org/abs/1707.03429}{https://arxiv.org/abs/1707.03429}}
@@ -254,27 +242,23 @@
 \section{Constraints for Running on Quantum Computers}
 \begin{frame}
     \frametitle{Why do we need compilers?}
-    \begin{itemize}
-        \item Despite programming at a low (per bit) level it still is abstracted from the hardware.
-        \item The compiler is used to enable running logical abstract circuit
-            on an actual device
-        \item NISQ devices have a number of limitations
-    \end{itemize}
     \only<1>{
+        \begin{itemize}
+            \item Despite programming at a low (per bit) level it still is abstracted from the hardware.
+            \item The compiler is used to enable running logical abstract circuit
+                on an actual device
+            \item NISQ devices have a number of limitations
+        \end{itemize}
         \centering
         \includegraphics[width=\textwidth,height=.6\textheight,keepaspectratio]{no_compile.png}
     }
     \only<2>{
-        \begin{columns}
-            \column{.45\textwidth}
-                \centering
-                \textbf{Bad Compilation}
-                \includegraphics[width=\textwidth]{bad_compile_circ.png}
-            \column{.45\textwidth}
-                \centering
-                \textbf{Good Compilation}
-                \includegraphics[width=\textwidth]{good_compile_circ.png}
-        \end{columns}
+            \centering
+            \textbf{Bad Compilation}
+            \includegraphics[width=\textwidth]{bad_compile_circ.png}
+            \centering
+            \textbf{Good Compilation}
+            \includegraphics[width=\textwidth]{good_compile_circ.png}
     }
     \only<3>{
         \begin{columns}
@@ -302,7 +286,12 @@
                 must be expressed in terms of their basis gates
         \end{itemize}
         \column{.5\textwidth}
-            something to demonstrate basis
+            \textbf{Superconducting Qubits:}\\
+                Cx, U3, id\\
+            \textbf{Trapped Ion Qubits:}\\
+                Ms, Rx, Ry\\
+            \textbf{Simulator:}\\
+                U1, U2, U3, Cx, Cz, Id, X, Y, Z, H, S, Sdg, t, tdg, swap, ccx, unitary, initialize, cu1, cu2, cu3, swap, mcx, mcz, mcu1, mcu2, mcu3, mcswap, muliplexer\\
     \end{columns}
 \end{frame}
 
@@ -420,6 +409,7 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{The DAG}
     \begin{columns}
         \column{0.45\textwidth}
             \centering
@@ -485,19 +475,75 @@
 \begin{frame}
     \centering
     \only<1>{
-    \textbf{Level 0}\\
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_0.png}}
+    \textbf{Optimization Level 0}\\
+    \begin{columns}
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item No Optimization
+            \item Unroll
+            \item Trivial Layout
+            \item Swap Mapping
+        \end{itemize}
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_0.png}
+    \end{columns}}
     \only<2>{
-    \textbf{Level 1}\\
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_1.png}
+    \textbf{Optimization Level 1}\\
+    \begin{columns}
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item Unroll
+            \item Trivial Layout
+            \item Swap Mapping
+            \item Optimization
+                \begin{itemize}
+                    \item Optimize 1Q
+                    \item CX Cancellation
+                \end{itemize}
+        \end{itemize}
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_1.png}
+    \end{columns}
     }
     \only<3>{
-    \textbf{Level 2}\\
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_2.png}
+    \textbf{Optimization Level 2}\\
+    \begin{columns}
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item Unroll
+            \item Dense Layout
+            \item Swap Mapping
+            \item Optimization
+                \begin{itemize}
+                    \item Optimize 1Q
+                    \item Commutative Cancellation
+                \end{itemize}
+        \end{itemize}
+        \column{.5\textwidth}
+            \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_2.png}
+    \end{columns}
     }
     \only<4>{
-        \textbf{Level 3}\\
-        \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_3.png}
+        \textbf{Optimization Level 3}\\
+    \begin{columns}
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item Unroll
+            \item Noise Aware Layout
+            \item Swap Mapping
+            \item Optimization
+                \begin{itemize}
+                    \item Optimize 1Q
+                    \item Commutative Cancellation
+                    \item Consolidate Blocks
+                    \item Remove Reset in 0 State
+                    \item Optimize Swap before measure
+                    \item Remove Diagonal Gates before measure
+                \end{itemize}
+        \end{itemize}
+        \column{.5\textwidth}
+            \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_3.png}
+    \end{columns}
     }
 \end{frame}
 
@@ -687,12 +733,20 @@
 
 \section{Conclusions}
 \subsection{Quantum Volume}
+{
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{footnote}{fg=ibm}
+\setbeamercolor{footnote mark}{fg=ibm}
+\setbeamercolor{footline}{fg=ibm}
 \begin{frame}
     \frametitle{Quantum Volume\footnotemark[1]}
-
-    \vspace{3em}
+    \begin{center}
+        \includegraphics[width=\textwidth,height=.8\textheight,keepaspectratio]{qv.png}
+    \end{center}
     \footnotetext[1]{\href{https://arxiv.org/abs/1811.12926}{https://arxiv.org/abs/1811.12926}}
 \end{frame}
+}
+
 \begin{frame}
     \frametitle{Conclusions}
     \begin{itemize}
