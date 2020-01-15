@@ -102,6 +102,7 @@
             \end{equation*}
     \end{columns}
 \end{frame}
+
 \subsubsection{Quantum Gates}
 \begin{frame}
     \frametitle{Quantum Gates}
@@ -115,7 +116,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Quantum Gates}
+    \frametitle{Some Quantum Gates}
     \begin{columns}
         \column{.4\textwidth}
             $\begin{array}{ccc}
@@ -177,7 +178,7 @@
                     \lstick{} & \gate{U2(\phi,\lambda)} & \qw \\
                 } & \frac{1}{\sqrt{2}} \begin{bmatrix}
                     1 & -e^{i\lambda} \\
-                    e^{i\phi} & e^{i(\phi + \lambda} \\
+                    e^{i\phi} & e^{i(\phi + \lambda)} \\
                 \end{bmatrix} \\
                 % U3
                 \text{U3} & \Qcircuit @C=1.0em @R=0.0em @!R {
@@ -233,7 +234,10 @@
                 \item A layer below the circuit model is to use pulses
                 \item Each quantum gate is defined as a pulse that gets
                     applied to the qubits
-                \item Enables you to tweak the definition of gates
+                \item Enables you to tweak the definition of gates for an
+                    existing circuit
+                \item Also can just define a custom pulse schedule and
+                    run that directly
                 \item Mostly used for physics research or hardware characterization
             \end{itemize}
     \end{columns}
@@ -244,12 +248,14 @@
     \frametitle{Why do we need compilers?}
     \only<1>{
         \begin{itemize}
-            \item Despite programming at a low (per bit) level it still is abstracted from the hardware.
-            \item The compiler is used to enable running logical abstract circuit
-                on an actual device
-            \item NISQ devices have a number of limitations
+            \item Despite programming at a low (per bit) level this is still
+                  abstracted from the hardware.
+i           \item NISQ devices have a number of limitations
+            \item The compiler is used to enable running logical abstract
+                  circuit on an actual device
         \end{itemize}
         \centering
+        \textbf{Example Circuit:}\\
         \includegraphics[width=\textwidth,height=.6\textheight,keepaspectratio]{no_compile.png}
     }
     \only<2>{
@@ -315,7 +321,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Not Enough Connectivity}
+    \frametitle{Not Enough Connectivity?}
     \begin{columns}
         \column{.5\textwidth}
             \begin{itemize}
@@ -325,6 +331,7 @@
             \end{itemize}
         \column{.5\textwidth}
             \begin{center}
+                \only<2>{
                 \textbf{SWAP Gate}
                 \begin{equation*}
                     \Qcircuit @C=1.0em @R=1.0em @!R {
@@ -336,6 +343,10 @@
 	             	    \lstick{} & \targ & \ctrl{-1} & \targ & \qw\\
                     }
                 \end{equation*}
+            }
+            \only<1> {
+                \includegraphics[width=\textwidth]{must_swap.png}
+            }
             \end{center}
     \end{columns}
 \end{frame}
