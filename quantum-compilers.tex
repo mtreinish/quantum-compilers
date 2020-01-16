@@ -193,10 +193,8 @@
                 \end{bmatrix} \\
 
                 % SWAP
-                \text{SWAP} & \Qcircuit @C=1.0em @R=0.0em @!R {
-                    \lstick{} & \qswap & \qw\\
-                    \lstick{} & \qswap \qwx[-1] & \qw\\
-                } & \begin{bmatrix}
+                \text{SWAP} & \includegraphics[scale=.5]{swap.png}
+                & \begin{bmatrix}
                     1 & 0 & 0 & 0 \\
                     0 & 0 & 1 & 0 \\
                     0 & 1 & 0 & 0 \\
@@ -706,10 +704,14 @@ i           \item NISQ devices have a number of limitations
         \end{equation*}
     }
     \only<2> {
-        \includegraphics[width=.3\textwidth]{bloch_fresh.png} $\rightarrow$ \includegraphics[width=.3\textwidth]{bloch_hadamard.png} $\rightarrow$ \includegraphics[width=.3\textwidth]{result_1q_bloch.png}
+        \begin{center}
+            \includegraphics[width=.25\textwidth]{bloch_fresh.png} $\rightarrow$ \includegraphics[width=.25\textwidth]{bloch_hadamard.png} $\rightarrow$ \includegraphics[width=.25\textwidth]{result_1q_bloch.png}
+        \end{center}
     }
     \only<3> {
-        \includegraphics[width=.45\textwidth]{bloch_fresh.png} $\rightarrow$ \includegraphics[width=.45\textwidth]{result_1q_bloch.png}
+        \begin{center}
+            \includegraphics[width=.4\textwidth]{bloch_fresh.png} $\rightarrow$ \includegraphics[width=.4\textwidth]{result_1q_bloch.png}
+        \end{center}
     }
     \only<4> {
         \vspace{3em}
@@ -728,7 +730,7 @@ i           \item NISQ devices have a number of limitations
     \begin{columns}
         \column{.5\textwidth}
             \begin{itemize}
-                \item After the layout step we need to ensure that 
+                \item After the layout step we need to ensure connectivity between qubits
                 \item 3 Algorithms included in Qiskit
                     \begin{itemize}
                         \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/basic_swap.py}{BasicSwap}
@@ -779,12 +781,18 @@ i           \item NISQ devices have a number of limitations
         \item IBM Q Experience (sign up to get access to public quantum computers): \href{https://quantum-computing.ibm.com}{https://quantum-computing.ibm.com}
         \item Tutorial on using Passmanager: {\small \href{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}}
         \item Qiskit Textbook: \href{https://qiskit.org/textbook/}{https://qiskit.org/textbook/}
+        \item My Talk from Last Year: \href{https://www.youtube.com/watch?v=th4TDYX6xoc}{https://www.youtube.com/watch?v=th4TDYX6xoc}
     \end{itemize}
 \end{frame}
 
-%\section{Backup Slides}
-%\begin{frame}[noframenumbering]
-%    \frametitle{BACKUP SLIDES}
-%\end{frame}
+\section{Backup Slides}
+\begin{frame}[noframenumbering]
+    \frametitle{BACKUP SLIDES}
+\end{frame}
+
+\subsection{Machine Types}
+    \begin{frame}[noframenumbering]
+        \includegraphics[width=\textwidth]{machine_types.png}
+\end{frame}
 
 \end{document}
