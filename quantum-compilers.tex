@@ -653,6 +653,22 @@ i           \item NISQ devices have a number of limitations
             \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{custom_layout_results.png}
     \end{columns}
 \end{frame}
+
+\subsection{Device Mapping}
+\begin{frame}
+    \frametitle{Swap Mapping/Routing}
+            \begin{itemize}
+                \item After the layout step we need to ensure connectivity between qubits
+                \item 3 Algorithms included in Qiskit
+                    \begin{itemize}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/basic_swap.py}{BasicSwap}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/lookahead_swap.py}{LookaheadSwap}
+                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/stochastic_swap.py}{StochasticSwap}
+                    \end{itemize}
+                \item StochasticSwap is used in all presets
+            \end{itemize}
+\end{frame}
+
 \subsection{Analysis Pass}
 {
 \setbeamercolor{background canvas}{bg=black}
@@ -724,26 +740,6 @@ i           \item NISQ devices have a number of limitations
 
 \end{frame}
 
-\subsection{Device Mapping}
-\begin{frame}
-    \frametitle{Swap Mapping/Routing}
-    \begin{columns}
-        \column{.5\textwidth}
-            \begin{itemize}
-                \item After the layout step we need to ensure connectivity between qubits
-                \item 3 Algorithms included in Qiskit
-                    \begin{itemize}
-                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/basic_swap.py}{BasicSwap}
-                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/lookahead_swap.py}{LookaheadSwap}
-                        \item \href{https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/transpiler/passes/routing/stochastic_swap.py}{StochasticSwap}
-                    \end{itemize}
-                \item StochasticSwap is used in all presets
-            \end{itemize}
-        \column{.5\textwidth}
-            Insert Diagram of Swap Mapping
-    \end{columns}
-        
-\end{frame}
 
 \section{Conclusions}
 \subsection{Quantum Volume}
