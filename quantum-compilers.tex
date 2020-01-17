@@ -87,9 +87,11 @@
     \begin{columns}
         \column{0.5\textwidth}
             \begin{itemize}
-                \item Used to describe operations on a quantum computer
+                \item Used to describe a series of operations on a quantum computer
                 \item Each row represents a bit (either classical or quantum)
-                \item Shows dependency of operation
+                \item The operations in the circuit performed in order on each qubit from
+                    left to right
+                \item Shows dependency of operation, no timing information
             \end{itemize}
         \column{0.5\textwidth}
             \begin{equation*}
@@ -107,9 +109,9 @@
 \begin{frame}
     \frametitle{Quantum Gates}
     \begin{itemize}
-        \item Quantum gates
+        \item Quantum gates are the operations performed on qubits
         \item Gates are reversible
-        \item Each gate can be represented as a unitary matrix
+        \item Each gate is represented as a unitary matrix
     \end{itemize}
     \centering
     \includegraphics[width=.85\textwidth]{gate_h_bloch.png}
@@ -248,7 +250,7 @@
         \begin{itemize}
             \item Despite programming at a low (per bit) level this is still
                   abstracted from the hardware.
-i           \item NISQ devices have a number of limitations
+            \item NISQ devices have a number of limitations
             \item The compiler is used to enable running logical abstract
                   circuit on an actual device
         \end{itemize}
@@ -258,10 +260,10 @@ i           \item NISQ devices have a number of limitations
     }
     \only<2>{
             \centering
-            \textbf{Bad Compilation}
+            \textbf{Bad Compilation:}
             \includegraphics[width=\textwidth]{bad_compile_circ.png}
             \centering
-            \textbf{Good Compilation}
+            \textbf{Good Compilation:}
             \includegraphics[width=\textwidth]{good_compile_circ.png}
     }
     \only<3>{
@@ -551,7 +553,7 @@ i           \item NISQ devices have a number of limitations
                 \end{itemize}
         \end{itemize}
         \column{.5\textwidth}
-            \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{preset_level_3.png}
+        \includegraphics[width=\textwidth,height=.95\textheight,keepaspectratio]{preset_level_3.png}
     \end{columns}
     }
 \end{frame}
@@ -563,8 +565,8 @@ i           \item NISQ devices have a number of limitations
     \begin{columns}
         \column{.5\textwidth}
         \begin{itemize}
-            \item The first stage of any compilation is to unroll the gates to
-                the basis set
+            \item Often the first step of a compilation is to unroll the
+                gates to the basis set
             \item Currently this is done using a descent tree
             \item Mainly works for superconducting qubit basis
             \item Other types of devices support is hardcoded extra path
@@ -774,10 +776,10 @@ i           \item NISQ devices have a number of limitations
         \item These Slides: \href{https://github.com/mtreinish/quantum-compilers}{https://github.com/mtreinish/quantum-compilers}
         \item Qiskit: \href{https://qiskit.org/}{https://qiskit.org/}
         \item Qiskit Terra on Github: \href{https://github.com/Qiskit/qiskit-terra}{https://github.com/Qiskit/qiskit-terra}
-        \item IBM Q Experience (sign up to get access to public quantum computers): \href{https://quantum-computing.ibm.com}{https://quantum-computing.ibm.com}
+        \item IBM Quantum Experience (sign up to get access to public quantum computers): \href{https://quantum-computing.ibm.com}{https://quantum-computing.ibm.com}
         \item Tutorial on using Passmanager: {\small \href{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}}
         \item Qiskit Textbook: \href{https://qiskit.org/textbook/}{https://qiskit.org/textbook/}
-        \item My Talk from Last Year: \href{https://www.youtube.com/watch?v=th4TDYX6xoc}{https://www.youtube.com/watch?v=th4TDYX6xoc}
+        \item Talk on Open Source Quantum Computing from LCA 2019: \href{https://www.youtube.com/watch?v=th4TDYX6xoc}{https://www.youtube.com/watch?v=th4TDYX6xoc}
     \end{itemize}
 \end{frame}
 
