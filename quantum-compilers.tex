@@ -182,7 +182,7 @@
                     1 & -e^{i\lambda} \\
                     e^{i\phi} & e^{i(\phi + \lambda)} \\
                 \end{bmatrix} \\
-                % U3
+                % U
                 \text{U3} & \Qcircuit @C=1.0em @R=0.0em @!R {
                     \lstick{} & \gate{Rz(\phi)} & \qw \\
                 } & U(\theta,\phi,\lambda) \\
@@ -293,11 +293,11 @@
         \end{itemize}
         \column{.5\textwidth}
             \textbf{Superconducting Qubits:}\\
-                Cx, U3, id\\
+                CX, Rz, $\sqrt{X}$, X,  id\\
             \textbf{Trapped Ion Qubits:}\\
                 Ms, Rx, Ry\\
             \textbf{Simulator:}\\
-                U1, U2, U3, Cx, Cz, Id, X, Y, Z, H, S, Sdg, t, tdg, swap, ccx, unitary, initialize, cu1, cu2, cu3, swap, mcx, mcz, mcu1, mcu2, mcu3, mcswap, muliplexer\\
+                U1, U2, U3, CX, Cz, Id, X, Y, Z, H, S, Sdg, t, tdg, swap, ccx, unitary, initialize, cu1, cu2, cu3, swap, mcx, mcz, mcu1, mcu2, mcu3, mcswap, muliplexer\\
     \end{columns}
 \end{frame}
 
