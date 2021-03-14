@@ -598,17 +598,11 @@
 
 \begin{frame}
     \frametitle{Layout Example}
-    \begin{columns}
-        \column{.45\textwidth}
-            \centering
-            \textbf{Logical Circuit}
-            \includegraphics[width=\textwidth]{no_layout.png}
-        \column{.45\textwidth}
-            \centering
-            \textbf{Target Device}
-            \only<1>{\includegraphics[width=\textwidth]{ibmqx2-labeled.png}}
-            \only<2>{\includegraphics[width=.7\textwidth]{layout_device.png}}
-    \end{columns}
+    \centering
+    \textbf{Logical Circuit}\\
+    \includegraphics[width=\textwidth]{no_layout.png}\\
+    \textbf{Target Device}\\
+    \includegraphics[width=.25\textwidth]{layout_device.png}
 \end{frame}
 
 
@@ -616,20 +610,16 @@
     \begin{columns}
         \column{.5\textwidth}
             \centering
-            optimization\_level=1\\
             TrivialLayout\\
             \includegraphics[width=\textwidth, height=.6\textheight, keepaspectratio]{layout_1.png}\\
-            optimization\_level=2\\
             DenseLayout\\
             \includegraphics[width=\textwidth, height=.6\textheight, keepaspectratio]{layout_2.png}
 
         \column{.5\textwidth}
             \centering
-            optimization\_level=3\\
             NoiseAdaptiveLayout\\
             \includegraphics[width=\textwidth, height=.6\textheight, keepaspectratio]{layout_3.png}\\
             Custom Layout\\
-            (optimization\_level=1)\\
             \includegraphics[width=\textwidth, height=.6\textheight, keepaspectratio]{custom_layout.png}
     \end{columns}
 \end{frame}
@@ -638,20 +628,16 @@
     \begin{columns}
         \column{.5\textwidth}
             \centering
-            optimization\_level=1\\
             TrivialLayout\\
             \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{layout_1_results.png}\\
-            optimization\_level=2\\
             DenseLayout\\
         \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{layout_2_results.png}
 
         \column{.5\textwidth}
             \centering
-            optimization\_level=3\\
             NoiseAdaptiveLayout\\
             \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{layout_3_results.png}\\
             Custom Layout\\
-            (optimization\_level=1)\\
             \includegraphics[width=\textwidth, height=.4\textheight, keepaspectratio]{custom_layout_results.png}
     \end{columns}
 \end{frame}
@@ -717,13 +703,17 @@
         \vspace{3em}
         \begin{equation*}
             \Qcircuit @C=1.0em @R=0.0em @!R {
-	            \lstick{ {q}_{0} : \ket{0} } & \gate{H} & \gate{R_z(\frac{\pi}{4})} & \qw & \qw\\
+                \lstick{ {q}_{0} : \ket{0} } & \gate{H} & \gate{T} & \gate{S} & \gate{R_z(\frac{\pi}{4})} & \qw & \qw\\
     	    }
         \end{equation*}
     }
     \only<2> {
         \begin{center}
-            \includegraphics[width=.25\textwidth]{bloch_fresh.png} $\rightarrow$ \includegraphics[width=.25\textwidth]{bloch_hadamard.png} $\rightarrow$ \includegraphics[width=.25\textwidth]{result_1q_bloch.png}
+            \includegraphics[width=.18\textwidth]{bloch_fresh.png}
+            \includegraphics[width=.18\textwidth]{bloch_h.png}
+            \includegraphics[width=.18\textwidth]{bloch_t.png}
+            \includegraphics[width=.18\textwidth]{bloch_s.png}
+            \includegraphics[width=.18\textwidth]{result_1q_bloch.png} 
         \end{center}
     }
     \only<3> {
@@ -735,11 +725,10 @@
         \vspace{3em}
         \begin{equation*}
             \Qcircuit @C=1.0em @R=0.0em @!R {
-        	 	\lstick{ {q}_{0} : \ket{0} } & \gate{U_2\left(\frac{\pi}{4},\pi\right)} & \qw & \qw\\
+        	 	\lstick{ {q}_{0} : \ket{0} } & \gate{U\left(\frac{\pi}{2},\pi,-\pi\right)} & \qw & \qw\\
             }
         \end{equation*}
     }
-
 \end{frame}
 
 
@@ -759,24 +748,14 @@
 \end{frame}
 }
 
-%\begin{frame}
-%    \frametitle{Conclusions}
-%    \begin{itemize}
-%        \item Techniques used are similar to a classical compiler
-%        \item Implementation details are different because of uniqueness of quantum computing
-%        \item A good compiler can be the difference between a functional
-%            program and one that doesn't work
-%    \end{itemize}
-%\end{frame}
-
 \subsection{Questions?}
 \begin{frame}
 \frametitle{Where to get more information}
     \begin{itemize}
-        \item These Slides: \href{https://github.com/mtreinish/quantum-compilers/tree/fossasia-2021}{{https://github.com/mtreinish/quantum-compilers/tree/fossasia-2021}
+        \item These Slides: \href{https://github.com/mtreinish/quantum-compilers/tree/fossasia-2021}{https://github.com/mtreinish/quantum-compilers/tree/fossasia-2021}
         \item Qiskit: \href{https://qiskit.org/}{https://qiskit.org/}
         \item Qiskit Terra on Github: \href{https://github.com/Qiskit/qiskit-terra}{https://github.com/Qiskit/qiskit-terra}
-        \item IBM Quantum Experience (sign up to get access to public quantum computers): \href{https://quantum-computing.ibm.com}{https://quantum-computing.ibm.com}
+        \item IBM Quantum (sign up to get access to public quantum computers): \href{https://quantum-computing.ibm.com}{https://quantum-computing.ibm.com}
         \item Tutorial on using Passmanager: {\small \href{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}{https://github.com/Qiskit/qiskit-iqx-tutorials/blob/master/qiskit/advanced/terra/4\_transpiler\_passes\_and\_passmanager.ipynb}}
         \item Qiskit Textbook: \href{https://qiskit.org/textbook/}{https://qiskit.org/textbook/}
         \item Talk on Open Source Quantum Computing from LCA 2019: \href{https://www.youtube.com/watch?v=th4TDYX6xoc}{https://www.youtube.com/watch?v=th4TDYX6xoc}
